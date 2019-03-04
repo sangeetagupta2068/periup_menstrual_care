@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1040984457354",
+    "firebase_url": "https://periup-cae47.firebaseio.com",
+    "project_id": "periup-cae47",
+    "storage_bucket": "periup-cae47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040984457354:android:a640dd7513e986de",
+        "android_client_info": {
+          "package_name": "com.periup.periup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040984457354-3oj1ltpdbjk4tj9ljah5omf5gc1m7qhm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.periup.periup",
+            "certificate_hash": "96440f17001db73afb34bf22ea41ba252416ea02"
+          }
+        },
+        {
+          "client_id": "1040984457354-19c3bge739g7a6ju4uv8oknq0aohnbos.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiVG5DXHBHrQarCntjY-VydrAVyuJ0SzE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040984457354-19c3bge739g7a6ju4uv8oknq0aohnbos.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
