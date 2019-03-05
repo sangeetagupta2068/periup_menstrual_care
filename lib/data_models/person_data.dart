@@ -5,9 +5,8 @@ class Person {
     String name;
     String userName;
     String email;
-    String medicalHistory;
     String gender;
-    bool intercouseStatus;
+    bool hasPCOD;
     List<PeriodDate> periodDates = new List<PeriodDate>();
     int age;
 
@@ -15,9 +14,8 @@ class Person {
       this.age,
       this.userName,
       this.email,
-      this.medicalHistory,
       this.gender,
-      this.intercouseStatus,});
+      this.hasPCOD});
 
     DateTime getNextCycleDate(DateTime recentPeriodDate){
 
@@ -28,8 +26,10 @@ class Person {
            count = (periodDates.length - 7);
         }
 
-      while(count<periodDates.length){
-        duration = ((periodDates.elementAt(count).menstrualCycleDuration)/count+1).round();
+      while(count<periodDates.length) {
+        duration = ((periodDates
+            .elementAt(count)
+            .menstrualCycleDuration) / count + 1).round();
         ++count;
       }
 
@@ -37,7 +37,27 @@ class Person {
     }
 
     void setActualCycleDate(DateTime actualDate){
-      periodDates.add(PeriodDate(periodDates.elementAt(periodDates.length -1).endPeriodDate, actualDate,true));
+      periodDates.add(PeriodDate(periodDates.last.endPeriodDate, actualDate,true));
+      periodDates.last.menstrualCycleDuration = periodDates.last.endPeriodDate
+          .difference(periodDates.last.startPeriodDate).inDays;
+    }
+
+    bool checkPregnancyStatus(DateTime date,bool intercourseStatus){
+        if(periodDates.last.menstrualCycleDuration > 30 && (intercourseStatus)){
+           print("Please consult a doctor as you might be pregnant");
+           return true;
+        }
+
+        return false;
+    }
+
+    bool checkPCODStatus(DateTime date,bool familyMemberHasDiabetis){
+      if(periodDates.last.menstrualCycleDuration > 30 && (hasPCOD) || (familyMemberHasDiabetis)){
+        print("Please consult a doctor as you are showing signs of irregular periods");
+        return true;
+      }
+
+      return false;
     }
 
 }
