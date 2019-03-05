@@ -36,13 +36,13 @@ class Person {
       return recentPeriodDate.add(Duration(days:duration));
     }
 
-    void setActualCycleDate(DateTime actualDate){
+    void setHerActualCycleDate(DateTime actualDate){
       periodDates.add(PeriodDate(periodDates.last.endPeriodDate, actualDate,true));
       periodDates.last.menstrualCycleDuration = periodDates.last.endPeriodDate
           .difference(periodDates.last.startPeriodDate).inDays;
     }
 
-    bool checkPregnancyStatus(DateTime date,bool intercourseStatus){
+    bool checkHerPregnancyStatus(DateTime date,bool intercourseStatus){
         if(periodDates.last.menstrualCycleDuration > 30 && (intercourseStatus)){
            print("Please consult a doctor as you might be pregnant");
            return true;
@@ -51,12 +51,20 @@ class Person {
         return false;
     }
 
-    bool checkPCODStatus(DateTime date,bool familyMemberHasDiabetis){
+    bool checkHerPCODStatus(DateTime date,bool familyMemberHasDiabetis){
       if(periodDates.last.menstrualCycleDuration > 30 && (hasPCOD) || (familyMemberHasDiabetis)){
         print("Please consult a doctor as you are showing signs of irregular periods");
         return true;
       }
 
+      return false;
+    }
+
+    bool checkHerMenopauseStatus(){
+      if(periodDates.last.menstrualCycleDuration > 30 && age > 40){
+        print("Please consult doctor as you might be approaching your menopause");
+        return true;
+      }
       return false;
     }
 
