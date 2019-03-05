@@ -4,12 +4,14 @@ import 'package:periup/utils/firebase_user_authentication.dart';
 import 'package:periup/pages/terms_of_use_page.dart';
 
 class HomePage extends StatefulWidget {
+
   FirebaseUser firebaseUser;
   FirebaseAuthentication firebaseGoogleAuthentication;
 
   HomePage({this.firebaseUser, this.firebaseGoogleAuthentication}) : super();
   @override
   HomePageState createState() => HomePageState();
+
 }
 
 class HomePageState extends State<HomePage> {

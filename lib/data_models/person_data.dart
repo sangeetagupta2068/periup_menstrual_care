@@ -1,43 +1,43 @@
+import 'period_date.dart';
+
 class Person {
 
     String name;
     String userName;
     String email;
-    int age;
-    Person(this.name,this.userName,this.email,this.age);
-
     String medicalHistory;
+    String gender;
+    bool intercouseStatus;
+    List<PeriodDate> periodDates = new List<PeriodDate>();
+    int age;
 
-    String _gender;
+    Person({this.name,
+      this.age,
+      this.userName,
+      this.email,
+      this.medicalHistory,
+      this.gender,
+      this.intercouseStatus,});
 
-    String get gender => _gender;
+    DateTime getNextCycleDate(DateTime recentPeriodDate){
 
-    set gender(String value) {
-      _gender = value;
+      int duration;
+      int count = 0;
+
+        if(periodDates.length > 6){
+           count = (periodDates.length - 7);
+        }
+
+      while(count<periodDates.length){
+        duration = ((periodDates.elementAt(count).menstrualCycleDuration)/count+1).round();
+        ++count;
+      }
+
+      return recentPeriodDate.add(Duration(days:duration));
     }
 
-    bool get intercouseStatus => _intercouseStatus;
-
-    set intercouseStatus(bool value) {
-      _intercouseStatus = value;
+    void setActualCycleDate(DateTime actualDate){
+      periodDates.add(PeriodDate(periodDates.elementAt(periodDates.length -1).endPeriodDate, actualDate,true));
     }
-
-    DateTime get previousPeriodDate => _previousPeriodDate;
-
-    set previousPeriodDate(DateTime value) {
-      _previousPeriodDate = value;
-    }
-
-    bool _intercouseStatus;
-    DateTime _previousPeriodDate;
-    DateTime _currentPeriodDate;
-
-    DateTime get currentPeriodDate => _currentPeriodDate;
-
-    set currentPeriodDate(DateTime value) {
-      _currentPeriodDate = value;
-    }
-
-
 
 }
