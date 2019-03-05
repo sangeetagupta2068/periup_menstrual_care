@@ -52,5 +52,7 @@
     			</array>
     		</dict>
     	</array>
+    	<key>NSCalendarsUsageDescription</key>
+        <string>INSERT_REASON_HERE</string>
 </dict>
 </plist>

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:periup/utils/firebase_user_authentication.dart';
+import 'package:periup/pages/terms_of_use_page.dart';
 
 class HomePage extends StatefulWidget {
   FirebaseUser firebaseUser;
@@ -12,23 +13,30 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+
   int index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-        appBar: AppBar(),
-
-        body: Center(
-          child: Text("Signed in"),
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.lightBlueAccent,
         ),
+
+        body: Center(child: Text("hello")),
 
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
+
           onTap: (int index) => setState(() {
             this.index = index;
+            switch (index){
+              case 0: ;break;
+            }
           }),
+
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(
@@ -130,6 +138,11 @@ class HomePageState extends State<HomePage> {
                         title: Text("Help and Support"),
                         leading: Icon(Icons.help_outline),
                         onTap: (){},
+                      ),
+                      ListTile(
+                        title: Text("Terms of Use"),
+                        leading: Icon(Icons.security),
+                        onTap: () { Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TermsOfUsePage()));},
                       ),
                       ListTile(
                         title: Text("Sign Out"),
