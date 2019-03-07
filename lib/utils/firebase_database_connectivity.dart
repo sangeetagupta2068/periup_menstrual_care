@@ -71,15 +71,19 @@ class FirebaseDataBaseConnectivty{
     });
   }
 
-  Future<QuerySnapshot> getPostItems(){
-      postCollectionReference.getDocuments().then((postItemsSnapshot) {
-         return postItemsSnapshot;
-      });
+  Stream<QuerySnapshot> getPostItems(){
+
+      return postCollectionReference.snapshots();
+
   }
 
-  Future<QuerySnapshot> getDoctorItems(){
+  Future<List<Map<String,Object>>> getDoctorItems(){
+    List<Map<String,Object>> doctorPosts;
     doctorCollectionReference.getDocuments().then((doctorItemsSnapshot){
-      return doctorItemsSnapshot;
+      doctorItemsSnapshot.documents.forEach((doctorItemSnapshot){
+          doctorPosts.add(doctorItemSnapshot.data);
+      });
+      return doctorPosts;
     });
   }
 
