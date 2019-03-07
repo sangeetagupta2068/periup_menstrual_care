@@ -73,11 +73,12 @@ class FirebaseDataBaseConnectivty{
 
   Stream<QuerySnapshot> getPostItems(){
 
-      return postCollectionReference.snapshots();
+      return postCollectionReference.snapshots().forEach(action);
 
   }
 
-  Future<List<Map<String,Object>>> getDoctorItems(){
+  List<Map<String,Object>> getDoctorItems(){
+
     List<Map<String,Object>> doctorPosts;
     doctorCollectionReference.getDocuments().then((doctorItemsSnapshot){
       doctorItemsSnapshot.documents.forEach((doctorItemSnapshot){
