@@ -4,8 +4,7 @@ import 'package:periup/pages/home_page.dart';
 import 'package:periup/utils/firebase_user_authentication.dart';
 
 class SignInPage extends StatelessWidget {
-  final FirebaseAuthentication firebaseGoogleAuthentication =
-  new FirebaseAuthentication();
+  final FirebaseAuthentication firebaseGoogleAuthentication = FirebaseAuthentication();
   FirebaseUser user;
 
   @override

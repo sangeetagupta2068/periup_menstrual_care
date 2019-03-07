@@ -37,7 +37,7 @@ class Person {
     }
 
     void setHerActualCycleDate(DateTime actualDate){
-      periodDates.add(PeriodDate(periodDates.last.endPeriodDate, actualDate,true));
+      periodDates.add(PeriodDate(periodDates.last.endPeriodDate, actualDate));
       periodDates.last.menstrualCycleDuration = periodDates.last.endPeriodDate
           .difference(periodDates.last.startPeriodDate).inDays;
     }
