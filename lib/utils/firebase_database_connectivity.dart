@@ -7,6 +7,7 @@ class FirebaseDataBaseConnectivty{
 
   final CollectionReference userCollectionReference = Firestore.instance.collection('user');
   final CollectionReference postCollectionReference = Firestore.instance.collection('post');
+  final CollectionReference doctorCollectionReference = Firestore.instance.collection('doctor');
 
   void insertPostRecord(MenstrualStoryPost post){
     DocumentReference postDocumentReference = postCollectionReference.document(post.userEmail + post.dateTimeOfSignUp.toIso8601String());
@@ -56,14 +57,30 @@ class FirebaseDataBaseConnectivty{
     userDocumentReference.delete();
   }
 
-  void updateDoctorRecord(Doctor doctor){
-    DocumentReference userDocumentReference = userCollectionReference.document(doctor.email);
-    userDocumentReference.updateData(<String,Object>{
+  void insertDoctorRecord(Doctor doctor){
+    DocumentReference doctorDocumentReference = doctorCollectionReference.document(doctor.email);
+     doctorDocumentReference.setData(<String,Object>{
+       'doctor_fullname' : doctor.fullName,
+       'doctor_type': doctor.type,
+       'doctor_birthdate' : doctor.dateTimeOfBirth.toIso8601String(),
+       'location': doctor.location,
+       'doctor_name' : doctor.userName,
         'registration_number' : doctor.registrationNumber,
         'hospital_name' : doctor.hospitalName,
         'specialization' : doctor.specialization,
     });
   }
 
+  Future<QuerySnapshot> getPostItems(){
+      postCollectionReference.getDocuments().then((postItemsSnapshot) {
+         return postItemsSnapshot;
+      });
+  }
+
+  Future<QuerySnapshot> getDoctorItems(){
+    doctorCollectionReference.getDocuments().then((doctorItemsSnapshot){
+      return doctorItemsSnapshot;
+    });
+  }
 
 }

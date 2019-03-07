@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:periup/utils/firebase_user_authentication.dart';
 import 'package:periup/pages/terms_of_use_page.dart';
-import 'menstrual_story_forum_page.dart';
+import 'menstrual_story_listview_page.dart';
 import 'menstrual_story_add_page.dart';
 
 class HomePage extends StatefulWidget {
