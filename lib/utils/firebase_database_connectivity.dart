@@ -72,9 +72,7 @@ class FirebaseDataBaseConnectivty{
   }
 
   Stream<QuerySnapshot> getPostItems(){
-
       return postCollectionReference.snapshots();
-
   }
 
   List<Map<String,Object>> getDoctorItems(){
