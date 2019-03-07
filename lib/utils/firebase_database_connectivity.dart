@@ -73,7 +73,7 @@ class FirebaseDataBaseConnectivty{
 
   Stream<QuerySnapshot> getPostItems(){
 
-      return postCollectionReference.snapshots().forEach(action);
+      return postCollectionReference.snapshots();
 
   }
 

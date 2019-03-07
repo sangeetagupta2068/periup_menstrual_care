@@ -25,7 +25,6 @@ class FirebaseAuthentication{
   void firebaseGoogleSignOut() {
     googleSignIn.signOut();
     print("User signed out");
-  }
 
 }
 
