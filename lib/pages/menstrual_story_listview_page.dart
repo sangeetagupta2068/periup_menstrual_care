@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:periup/data_models/menstrual_story_post.dart';
 import 'package:periup/utils/firebase_database_connectivity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,13 +12,22 @@ class MenstrualCommunityPageState extends State<MenstrualCommunityPage> {
   FirebaseDataBaseConnectivty firebaseDataBaseConnectivty =
       new FirebaseDataBaseConnectivty();
 
+  List<MenstrualStoryPost> _posts = [];
+
+  Firestore firestore = Firestore.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: firebaseDataBaseConnectivty.getPostItems(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return LinearProgressIndicator();
-
+    return ListView.builder(
+      itemCount: _posts.length,
+        itemBuilder: (context, position) {
           return Card(
             elevation: 5.0,
             child: Padding(
@@ -30,7 +40,7 @@ class MenstrualCommunityPageState extends State<MenstrualCommunityPage> {
                     children: <Widget>[
                       Icon(Icons.account_circle, size: 30.0),
                       Text(
-                        " userName",
+                        _posts[position].authorName,
                         style: TextStyle(color: Colors.redAccent),
                       ),
                     ],
@@ -38,7 +48,7 @@ class MenstrualCommunityPageState extends State<MenstrualCommunityPage> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                        "This is where the user is going to post her menstrual story."),
+                        _posts[position].content),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
@@ -60,5 +70,14 @@ class MenstrualCommunityPageState extends State<MenstrualCommunityPage> {
             ),
           );
         });
+  }
+
+  void _getData() async {
+    firestore.collection('post').getDocuments().then((snapshot) {
+      snapshot.documents.forEach((document) {
+        _posts.add(MenstrualStoryPost(authorName: document.data['author_name'], content: document.data['post_content']));
+      });
+      setState(() {});
+    });
   }
 }
