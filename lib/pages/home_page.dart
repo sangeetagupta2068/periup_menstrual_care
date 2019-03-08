@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
   FirebaseUser firebaseUser;
   FirebaseAuthentication firebaseGoogleAuthentication;
 
-  HomePage({this.firebaseUser, this.firebaseGoogleAuthentication}) : super();
+  HomePage(this.firebaseUser, this.firebaseGoogleAuthentication) : super();
   @override
   HomePageState createState() => HomePageState();
 }
@@ -84,7 +84,7 @@ class HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push( context, MaterialPageRoute(builder: (context)=> MenstrualStoryPost()));
+            Navigator.push( context, MaterialPageRoute(builder: (context)=> MenstrualStoryPostPage(widget.firebaseUser.email)));
           },
           backgroundColor: Colors.black,
           child: Icon(Icons.add),

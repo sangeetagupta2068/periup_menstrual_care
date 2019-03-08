@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class FirebaseAuthentication{
+class FirebaseAuthentication {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = new GoogleSignIn();
@@ -25,6 +25,6 @@ class FirebaseAuthentication{
   void firebaseGoogleSignOut() {
     googleSignIn.signOut();
     print("User signed out");
+  }
 
 }
-

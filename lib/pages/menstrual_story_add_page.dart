@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:periup/data_models/user.dart';
+import 'package:periup/utils/firebase_database_connectivity.dart';
+import 'package:periup/data_models/menstrual_story_post.dart';
 
-class MenstrualStoryPost extends StatefulWidget {
+class MenstrualStoryPostPage extends StatefulWidget {
+
+  String email;
+  MenstrualStoryPostPage(this.email) : super();
+
   @override
-  MenstrualStoryPostState createState() => MenstrualStoryPostState();
+  MenstrualStoryPostPageState createState() => MenstrualStoryPostPageState();
 }
 
-class MenstrualStoryPostState extends State<MenstrualStoryPost> {
-
-  String _note;
+class MenstrualStoryPostPageState extends State<MenstrualStoryPostPage> {
+  String _postContent;
   TextEditingController _textEditingController;
 
   @override
   void initState() {
     super.initState();
-    _textEditingController = new TextEditingController(text: _note);
+    _textEditingController = TextEditingController(text: _postContent);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading:
-          InkWell(
+          leading: InkWell(
             child: Icon(
               Icons.chevron_left,
               color: Colors.white,
@@ -35,49 +40,46 @@ class MenstrualStoryPostState extends State<MenstrualStoryPost> {
           backgroundColor: Colors.lightBlueAccent,
         ),
         body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                  decoration: new InputDecoration(
-                    hintText: 'Optional note',
+            child: Padding(
+              padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  TextField(
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "What's your menstruation story?",
+                    ),
+                    controller: _textEditingController,
+                    onChanged: (value) => _postContent = value,
                   ),
-                  controller: _textEditingController,
-                  onChanged: (value) => _note = value,
-                ),
-              RaisedButton(
-                color: Colors.black,
-                child: Text("POST",style: TextStyle(color: Colors.white),),
-                onPressed: (){},
-              )
-
-            ],
-          ),
-
-//            child:Column(
-//              children: <Widget>[
-//                Expanded(
-//                  flex: 4,
-//                  child: Card(
-//                    child: TextField(
-//                        decoration: InputDecoration(
-//                          hintText: "Share your menstrual story to the world",
-//                          border: InputBorder.none,
-//                          hintStyle: TextStyle(color: Colors.black54, fontSize: 18.0),
-//                        )),
-//                  ),
-//                )
-//              ],
-//
-//            ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        "POST",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                         FirebaseDataBaseConnectivty().insertPostRecord(MenstrualStoryPost(
+                           content: this._postContent,
+                           dateTimeOfPost: DateTime.now(),
+                           authorName: "Sangeeta Gupta",
+                           userEmail: widget.email,
+                         ));
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-              Colors.lightBlueAccent,
-              Colors.lightGreenAccent
-            ],
-                ))));
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.lightBlueAccent, Colors.lightGreenAccent],
+            ))));
   }
 }
