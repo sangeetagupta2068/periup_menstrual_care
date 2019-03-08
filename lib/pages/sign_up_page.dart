@@ -5,12 +5,12 @@ import 'package:periup/pages/user_form.dart';
 import 'package:periup/utils/firebase_user_authentication.dart';
 
 class SignInPage extends StatelessWidget {
-  final FirebaseAuthentication firebaseGoogleAuthentication = FirebaseAuthentication();
+  final FirebaseAuthentication firebaseGoogleAuthentication =
+      FirebaseAuthentication();
   FirebaseUser user;
 
   @override
   Widget build(BuildContext context) {
-
     var signInAppBar = AppBar(
       elevation: 0.0,
       backgroundColor: Colors.lightBlueAccent,
@@ -58,13 +58,17 @@ class SignInPage extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () => firebaseGoogleAuthentication
-                    .firebaseGoogleSignIn()
-                    .then((FirebaseUser user) {
-                  print(user);
-                  this.user = user;
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=> UserDetailPage(this.user,this.firebaseGoogleAuthentication)));
+                        .firebaseGoogleSignIn()
+                        .then((FirebaseUser user) {
+                      print(user);
+                      this.user = user;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserDetailPage(this.user,
+                                  this.firebaseGoogleAuthentication)));
 //                  Navigator.push( context, MaterialPageRoute(builder: (context)=> HomePage(firebaseUser: this.user,firebaseGoogleAuthentication: this.firebaseGoogleAuthentication,)));
-                }),
+                    }),
                 color: Colors.white,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

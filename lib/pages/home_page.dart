@@ -84,7 +84,11 @@ class HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push( context, MaterialPageRoute(builder: (context)=> MenstrualStoryPostPage(widget.firebaseUser.email)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        MenstrualStoryPostPage(widget.firebaseUser.email)));
           },
           backgroundColor: Colors.black,
           child: Icon(Icons.add),

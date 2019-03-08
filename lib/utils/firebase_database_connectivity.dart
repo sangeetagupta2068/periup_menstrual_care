@@ -1,23 +1,26 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:periup/data_models/menstrual_story_post.dart';
 import 'package:periup/data_models/user.dart';
 //import 'package:periup/data_models/doctor.dart';
 
-class FirebaseDataBaseConnectivty{
-
-  final CollectionReference userCollectionReference = Firestore.instance.collection('user');
-  final CollectionReference postCollectionReference = Firestore.instance.collection('post');
+class FirebaseDataBaseConnectivty {
+  final CollectionReference userCollectionReference =
+      Firestore.instance.collection('user');
+  final CollectionReference postCollectionReference =
+      Firestore.instance.collection('post');
 //  final CollectionReference doctorCollectionReference = Firestore.instance.collection('doctor');
 
-  void insertPostRecord(MenstrualStoryPost post){
-    DocumentReference postDocumentReference = postCollectionReference.document(post.userEmail + post.dateTimeOfPost.toIso8601String());
-    postDocumentReference.setData(<String,Object>{
+  void insertPostRecord(MenstrualStoryPost post) {
+    DocumentReference postDocumentReference = postCollectionReference
+        .document(post.userEmail + post.dateTimeOfPost.toIso8601String());
+    postDocumentReference.setData(<String, Object>{
       'author_name': post.authorName,
       'post_content': post.content,
-      'post_published_at':post.dateTimeOfPost.toIso8601String(),
+      'post_published_at': post.dateTimeOfPost.toIso8601String(),
       'likes': [],
-    }).whenComplete((){ print('record added');});
+    }).whenComplete(() {
+      print('record added');
+    });
   }
 
 //  User getUserRecord(String email){
@@ -25,33 +28,38 @@ class FirebaseDataBaseConnectivty{
 //    userDocumentReference.get();
 //  }
 
-  void insertUserRecord(User user){
-    DocumentReference userDocumentReference = userCollectionReference.document(user.email);
-    userDocumentReference.setData(<String,String>{
-      'user_fullname' : user.fullName,
+  void insertUserRecord(User user) {
+    DocumentReference userDocumentReference =
+        userCollectionReference.document(user.email);
+    userDocumentReference.setData(<String, String>{
+      'user_fullname': user.fullName,
       'user_type': user.type,
-      'user_bio' : user.bio,
-      'user_birthdate' : user.dateTimeOfBirth.toIso8601String(),
+      'user_bio': user.bio,
+      'user_birthdate': user.dateTimeOfBirth.toIso8601String(),
       'location': user.location,
-      'user_email' : user.email,
-    }).whenComplete((){print('record added for user');});
-  }
-
-  void updatePostRecordOnLike(String email,String postId){
-    DocumentReference postDocumentReference = postCollectionReference.document(postId);
-    postDocumentReference.updateData(<String,Object>{
-      'likes' : FieldValueType.arrayUnion,
+      'user_email': user.email,
+    }).whenComplete(() {
+      print('record added for user');
     });
-
   }
 
-  void deletPostRecord(MenstrualStoryPost post){
-    DocumentReference postDocumentReference = postCollectionReference.document(post.userEmail + post.dateTimeOfPost.toIso8601String());
+  void updatePostRecordOnLike(String email, String postId) {
+    DocumentReference postDocumentReference =
+        postCollectionReference.document(postId);
+    postDocumentReference.updateData(<String, Object>{
+      'likes': FieldValueType.arrayUnion,
+    });
+  }
+
+  void deletPostRecord(MenstrualStoryPost post) {
+    DocumentReference postDocumentReference = postCollectionReference
+        .document(post.userEmail + post.dateTimeOfPost.toIso8601String());
     postDocumentReference.delete();
   }
 
-  void deletUserRecord(String email){
-    DocumentReference userDocumentReference = userCollectionReference.document(email);
+  void deletUserRecord(String email) {
+    DocumentReference userDocumentReference =
+        userCollectionReference.document(email);
     userDocumentReference.delete();
   }
 
@@ -69,8 +77,8 @@ class FirebaseDataBaseConnectivty{
 //    });
 //  }
 
-  Stream<QuerySnapshot> getPostItems(){
-      return postCollectionReference.snapshots();
+  Stream<QuerySnapshot> getPostItems() {
+    return postCollectionReference.snapshots();
   }
 
 //  List<Map<String,Object>> getDoctorItems(){

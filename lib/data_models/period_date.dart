@@ -1,9 +1,7 @@
 class PeriodDate {
+  DateTime startPeriodDate;
+  DateTime endPeriodDate;
+  int menstrualCycleDuration;
 
-      DateTime startPeriodDate;
-      DateTime endPeriodDate;
-      int menstrualCycleDuration;
-
-      PeriodDate(this.startPeriodDate,this.endPeriodDate);
-
+  PeriodDate(this.startPeriodDate, this.endPeriodDate);
 }

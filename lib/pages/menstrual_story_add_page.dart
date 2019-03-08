@@ -4,7 +4,6 @@ import 'package:periup/utils/firebase_database_connectivity.dart';
 import 'package:periup/data_models/menstrual_story_post.dart';
 
 class MenstrualStoryPostPage extends StatefulWidget {
-
   String email;
   MenstrualStoryPostPage(this.email) : super();
 
@@ -63,12 +62,13 @@ class MenstrualStoryPostPageState extends State<MenstrualStoryPostPage> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
-                         FirebaseDataBaseConnectivty().insertPostRecord(MenstrualStoryPost(
-                           content: this._postContent,
-                           dateTimeOfPost: DateTime.now(),
-                           authorName: "Sangeeta Gupta",
-                           userEmail: widget.email,
-                         ));
+                        FirebaseDataBaseConnectivty()
+                            .insertPostRecord(MenstrualStoryPost(
+                          content: this._postContent,
+                          dateTimeOfPost: DateTime.now(),
+                          authorName: "Sangeeta Gupta",
+                          userEmail: widget.email,
+                        ));
                       },
                     ),
                   )
