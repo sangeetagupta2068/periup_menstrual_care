@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:periup/pages/doctors_page.dart';
 import 'package:periup/utils/firebase_user_authentication.dart';
 import 'package:periup/pages/terms_of_use_page.dart';
 import 'menstrual_story_listview_page.dart';
@@ -41,7 +43,11 @@ class HomePageState extends State<HomePage> {
                 this.index = index;
                 switch (index) {
                   case 0:
-                    ;
+                    break;
+                  case 1:
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorsPage()));
+                    break;
+                  case 2:
                     break;
                 }
               }),
@@ -170,4 +176,5 @@ class HomePageState extends State<HomePage> {
           ],
         )));
   }
+
 }
